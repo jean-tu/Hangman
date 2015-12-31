@@ -81,7 +81,9 @@ int main(int argc, const char * argv[]) {
     char c; 
     string guess;
     set<char> guessedBank;
-    
+    set<char> alreadyGuessed;
+    bool nextGuess = false; //if the user haas already guessed that letter, it should move on and skip the else statement in the while clause
+
     cin >> guess; 
     int correct = 0; 
     //grabs only the first character, if the user enters anything larger than 1
@@ -91,6 +93,13 @@ int main(int argc, const char * argv[]) {
     //while they still have guesses left or still have letters to guess 
     while(guesses > 0 && c != 1){
         letterFound = false;
+        nextGuess = false; 
+        for(set<char>::iterator it = alreadyGuessed.begin(); it != alreadyGuessed.end();++it){
+            if(*it == c){
+                cout << "You've already guessed " << c << endl; 
+                nextGuess = true;  
+            }
+        }
         if(c == '1'){
             //gave up & show them the word 
             cout << "The word was: " << word << endl;
@@ -100,12 +109,14 @@ int main(int argc, const char * argv[]) {
         if(c == '2'){
             cout << "THE HINT IS: " << hint << endl;
         }
-        else{
+        else if(nextGuess == false) {
             for(unsigned int i =0; i < word.size(); i++){
                 if(word[i] == c){
                     letterFound = true;
                     good[i] = c;
                     correct++;
+                    cout << "   CORRECT: you've guessed a letter! " << endl;
+                    alreadyGuessed.insert(c); 
                 }
                 //do nothing for else case
             }//end of for loop 
@@ -113,22 +124,28 @@ int main(int argc, const char * argv[]) {
                 //add the letter to the wrong bank 
                 guessedBank.insert(c);
                 guesses--; //subtract one 
-                       
+                if(guesses == 0){
+                    cout << "Sorry, you ran out of tries. The right word was: " << randomlyGWord[random] << endl;
+                    return 0; 
+                }       
             }
             cout << endl;
         } 
         cout << "   " << good << endl; //prints out the word so the user can see what they have solved
         if(good == word){
-            cout << "CONGRADULATIONS, you solved the word" << endl;
+            cout << endl; 
+            cout << "CONGRATULATIONS! You've solved the word!!!" << endl;
             return 0;
         }
-        cout << "You have " << guesses << " left" << endl;
-        cout << "   INCORRECT letters you guessed: "<< endl;
-        cout << "   "; 
+        cout << "GUESSES LEFT: " << guesses << endl;
+        cout << "----------------------------------------------" << endl;
+        cout << "|   INCORRECT letters you guessed:           "<< endl;
+        cout << "|   "; 
         for(set<char>::iterator it = guessedBank.begin(); it != guessedBank.end();++it){
             cout << *it << " ";
         }
         cout << endl;
+        cout << "----------------------------------------------" << endl;
         cout << "--------Guess again, enter 1 to quit/give up, or 2 to see the HINT again-------" << endl;
         cin >> c;
         letterFound = false;  

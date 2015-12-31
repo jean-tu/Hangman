@@ -1,7 +1,7 @@
 school 
 pen something you use to write with
 pencil something you use to write with
-erase something you use to get rid of mistakes
+eraser something you use to get rid of mistakes
 whiteout something you use to get rid of mistakes 
 paper something that you write on
 notebook bundles of paper that come in a spiral
