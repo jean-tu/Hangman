@@ -115,7 +115,6 @@ int main(int argc, const char * argv[]) {
                     letterFound = true;
                     good[i] = c;
                     correct++;
-                    cout << "   CORRECT: you've guessed a letter! " << endl;
                     alreadyGuessed.insert(c); 
                 }
                 //do nothing for else case
@@ -128,6 +127,9 @@ int main(int argc, const char * argv[]) {
                     cout << "Sorry, you ran out of tries. The right word was: " << randomlyGWord[random] << endl;
                     return 0; 
                 }       
+            }
+            else {
+                cout << "   CORRECT: you've guessed a letter! " << endl;
             }
             cout << endl;
         } 
