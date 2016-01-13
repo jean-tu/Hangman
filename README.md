@@ -43,5 +43,3 @@ I used a map to be able to store the words and hints from the input file provide
 
 I give a fair number of guesses --being the number of letters in a word, which gives the player a big advantage if there is a word with multiple repeating letters.
 
-I have a set that stores the incorrect letters guessed by the user and it gets displayed evertime the user makes a guess (correct & incorrect) and even if they are just asking to view the hint one more time. 
-
